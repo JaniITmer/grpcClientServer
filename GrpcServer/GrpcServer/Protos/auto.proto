@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package Auto;
+
+
+service Auto {
+	rpc Login(User) returns (Session_Id) {}
+	rpc Logout(Session_Id) returns (Result) {}
+	rpc Add(Data) returns (Result) {}
+	rpc List(Empty) returns (stream Car) {}
+	rpc Modify(Update) returns (Result) {}
+	rpc Delete(Remove) returns (Result) {}
+	rpc Register(AddUser) returns (Result) {}
+
+	rpc HealthCheck(Empty) returns (Result);
+}
+message Empty {
+}
+
+message User {
+  string username=1;
+  string password=2;
+}
+
+message Session_Id {
+  string id=1;
+}
+
+message Result {
+  string success=1;
+}
+
+message Data {
+   int32 id=1;
+   string name=2;
+   string type=3;
+   int32 price=4;
+   string uid=5;
+}
+
+message Car {
+   int32 id=1;
+   string name=2;
+   string type=3;
+   int32 price=4;
+   string username=5;
+}
+
+message Update {
+   int32 id=1;
+   string name=2;
+   string type=3;
+   int32 price=4;
+   string uid=5;
+}
+
+message Remove{
+	int32 id=1;
+	string uid=2;
+}
+
+message AddUser{
+	string username=1;
+	string password=2;
+}
